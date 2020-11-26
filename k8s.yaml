@@ -25,12 +25,14 @@ kind: Service
 metadata:
   name: levelupdevops
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: levelupdevops
   ports:
   - port: 80
     targetPort: 80
+    protocol: TCP
+    name: http
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
@@ -46,5 +48,5 @@ spec:
       paths:
       - backend:
           serviceName: levelupdevops
-          servicePort: 80
+          servicePort: http
         path: /
