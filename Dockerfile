@@ -10,7 +10,7 @@ RUN dotnet restore
 COPY . .
 RUN dotnet build -c Release
 RUN dotnet test
-RUN dotnet publish -c Release /dist
+RUN dotnet publish -c Release -o /dist
 
 
 #production server
