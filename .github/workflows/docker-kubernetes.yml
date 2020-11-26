@@ -27,7 +27,7 @@ jobs:
         password: ${{ secrets.ACR_PASSWORD }}
       
     - name: Azure Kubernetes set context
-      uses: Azure/aks-set-context@v1
+      uses: Azure/k8s-set-context@v1
       with:
         method: kubeconfig
         kubeconfig: ${{ secrets.KUBE_CONFIG }}
