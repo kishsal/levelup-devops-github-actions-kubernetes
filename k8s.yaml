@@ -31,20 +31,20 @@ spec:
   ports:
   - port: 80
     targetPort: 80
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: levelupdevops
-  annotations:
-    kubernetes.io/ingress.class: addon-http-application-routing
-spec:
-  rules:
-  # https://docs.microsoft.com/en-us/azure/aks/http-application-routing
-  - host: levelupdevops.AKS_URL
-    http:
-      paths:
-      - backend:
-          serviceName: levelupdevops
-          servicePort: 80
-        path: /
+# ---
+# apiVersion: networking.k8s.io/v1beta1
+# kind: Ingress
+# metadata:
+#   name: levelupdevops
+#   annotations:
+#     kubernetes.io/ingress.class: addon-http-application-routing
+# spec:
+#   rules:
+#   # https://docs.microsoft.com/en-us/azure/aks/http-application-routing
+#   - host: levelupdevops.AKS_URL
+#     http:
+#       paths:
+#       - backend:
+#           serviceName: levelupdevops
+#           servicePort: 80
+#         path: /
