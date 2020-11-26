@@ -1,0 +1,21 @@
+name: Docker build pr
+
+on:
+  push:
+    branches:
+      - '!main'
+
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Docker build pr
+        run: |
+          docker build --tag ${{ secrets.ACR_URL }}/levelupdevops-pr:${{ github.sha }} .
