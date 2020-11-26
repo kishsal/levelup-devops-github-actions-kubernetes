@@ -1,0 +1,40 @@
+name: Docker Build and Push, Kubernetes deploy
+
+on:
+  push:
+    branches:
+      -  main
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Docker Login
+      # You may pin to the exact commit or the version.
+      # uses: docker/login-action@adb73476b6e06caddec5db0bc1deacbec8cdd947
+      uses: docker/login-action@v1.6.0
+      with:
+        # Server address of Docker registry. If not set then will default to Docker Hub
+        registry: ${{ secrets.ACR_URL }}
+        # Username used to log against the Docker registry
+        username: ${{ secrets.ACR_USERNAME }}
+        # Password or personal access token used to log against the Docker registry
+        password: ${{ secrets.ACR_PASSWORD }}
+      
+    - name: Azure Kubernetes set context
+      uses: Azure/aks-set-context@v1
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secret.KUBE_CONFIG }}
+      
+    - name: Build the Docker image
+      run: 
+        docker build . --tag ${{ secret.ACR_URL }}/levelupdevops:${{ githubs.sha }} .
+        docker push ${{ secret.ACR_URL }}/levelupdevops:${{ githubs.sha }}
+        sed -i'' -e 's/ACR_URL/${{ secrets.ACR_URL }}/g' -e 's/AKS_URL/${{ secrets.AKS_URL }}/g' -e 's/IMAGE_LABEL/${{ github.sha }}/g' k8s.yaml
+        kubectl apply -f k8s.yml
