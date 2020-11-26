@@ -25,12 +25,13 @@ kind: Service
 metadata:
   name: levelupdevops
 spec:
-  type: ClusterIP
+  type: LoadBalancer
+  sessionAffinity: None
   selector:
     app: levelupdevops
   ports:
   - port: 80
-    targetPort: http
+    targetPort: 80
     protocol: TCP
     name: http
 ---
