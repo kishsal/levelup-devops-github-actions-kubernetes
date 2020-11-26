@@ -16,7 +16,7 @@ RUN dotnet publish -c Release -o /dist
 #production server
 FROM mcr.microsoft.com/dotnet/aspnet:3.1-alpine
 
-WORKDIR /dist
+WORKDIR /app
 
 ENV ASPNETCORE_ENVIRONMENT Production
 ENV ASPNETCORE_URLS http://+:80
