@@ -34,6 +34,6 @@ jobs:
       
     - name: Build the Docker image
       run: 
-        docker build
+        docker build --tag ${{ secrets.ACR_URL }}/levelupdevops:${{ github.sha }} .
         #docker push ${{ secrets.ACR_URL }}/levelupdevops:${{ github.sha }}
         #kubectl apply -f k8s.yaml
