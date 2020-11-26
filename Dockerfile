@@ -24,5 +24,5 @@ EXPOSE 80
 
 COPY --from=build /dist .
 
-CMD ["dotnet", "LevelUpDevOps.dll"]
+CMD ["dotnet", "levelup-devops-github-actions-kubernetes.dll"]
 
