@@ -33,6 +33,6 @@ jobs:
         kubeconfig: ${{ secrets.KUBE_CONFIG }}
       
     - name: Build the Docker image
-      run: 
+      run: |
         docker build --tag ${{ secrets.ACR_URL }}/levelupdevops:${{ github.sha }} .
         docker push ${{ secrets.ACR_URL }}/levelupdevops:${{ github.sha }}
